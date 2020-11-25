@@ -11,6 +11,8 @@
 #include "Stage.h"
 #include "Throttle.h"
 #include "SevenSegment.h"
+#include "NavGauge.h"
+#include "GaugeTest.h"
 #include "AirPlaneAutoPilot.h"
 #include "Dock.h"
 

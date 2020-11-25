@@ -132,7 +132,9 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Widgets\Fuel.h" />
     <ClCompile Include="Widgets\Fuel.cpp" />
+    <ClCompile Include="Widgets\GaugeTest.cpp" />
     <ClCompile Include="Widgets\Grapher.cpp" />
+    <ClCompile Include="Widgets\NavGauge.cpp" />
     <ClCompile Include="Widgets\SevenSegment.cpp" />
     <ClCompile Include="Widgets\Stage.cpp" />
     <ClCompile Include="Widgets\Throttle.cpp" />
@@ -165,7 +167,9 @@
     <ClInclude Include="Client\Client.h" />
     <ClInclude Include="Client\Structs.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="Widgets\GaugeTest.h" />
     <ClInclude Include="Widgets\Grapher.h" />
+    <ClInclude Include="Widgets\NavGauge.h" />
     <ClInclude Include="Widgets\SevenSegment.h" />
     <ClInclude Include="Widgets\Stage.h" />
     <ClInclude Include="Widgets\Throttle.h" />

@@ -1,6 +1,7 @@
+----------------------------------------
 YARK Yet Another Remote Kontroller
 https://github.com/c4ooo/YARK/releases
-
+----------------------------------------
 Place the /YARK/ folder inside KSP's /GameData/ folder.
 GameData/YARK/PluginData/YARK_PLUGIN/Config.xml contains configuration data.
 Bindings folder contain an example showing how to communicate with plugin.
@@ -41,7 +42,8 @@ DEPLOY/GameData/YARK/YARK_PLUGIN.dll
 -----------------------------
 
 YARK-MFD
-
+Get YARK for KSP here (required): https://github.com/c4ooo/YARK/releases
+-----------------------------
 https://forum.kerbalspaceprogram.com/index.php?/topic/177545-external-tcp-multi-function-display-kontroller/
 https://github.com/c4ooo/YARK-MFD/releases
 For 64-Bit windows.
@@ -95,6 +97,6 @@ glu32.lib;SDL2.lib;freetype.lib;opengl32.lib;glew32s.lib;%(AdditionalDependencie
 OpenGL
 ------
 https://www.khronos.org/registry/OpenGL-Refpages/
-
+Good Introductory Lecture https://slideplayer.com/slide/7509267/
 
 
