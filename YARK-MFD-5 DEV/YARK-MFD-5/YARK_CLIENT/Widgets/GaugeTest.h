@@ -12,4 +12,5 @@ public:
 	std::string GetTitle();
 	GaugeTest();
 	void Draw(XY pos, XY size);
+	void RotateText(std::string strTextToRotate, float AngleToRotate, float xCenter, float yCenter, float RadiusTextCircle);
 };

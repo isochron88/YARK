@@ -187,100 +187,57 @@ void GaugeTest::Draw(XY pos, XY size) {
 	
 	draw->DrawLine2D(xCenter - PLANE_MARKER_HALF_WIDTH - OFFSET_GAP, yCenter, xCenter - PLANE_MARKER_HALF_WIDTH - OFFSET_GAP - LENGTH_CROSS_ARM, yCenter);
 	draw->DrawLine2D(xCenter + PLANE_MARKER_HALF_WIDTH + OFFSET_GAP, yCenter, xCenter + PLANE_MARKER_HALF_WIDTH + OFFSET_GAP + LENGTH_CROSS_ARM, yCenter);
-	draw->DrawLine2D(xCenter, yCenter - PLANE_MARKER_HALF_HEIGHT - OFFSET_GAP, xCenter, yCenter - PLANE_MARKER_HALF_HEIGHT - OFFSET_GAP - LENGTH_CROSS_ARM);
 	draw->DrawLine2D(xCenter, yCenter + PLANE_MARKER_HALF_HEIGHT + OFFSET_GAP, xCenter, yCenter + PLANE_MARKER_HALF_HEIGHT + OFFSET_GAP + LENGTH_CROSS_ARM);
-
-
-	/*draw->DrawLine2D(xCenter - X_CROSS_OFFSET_FROM_CENTER, yCenter, xCenter - X_CROSS_OFFSET_FROM_CENTER - ArmLength, yCenter);
-	draw->DrawLine2D(xCenter + X_CROSS_OFFSET_FROM_CENTER, yCenter, xCenter + X_CROSS_OFFSET_FROM_CENTER + ArmLength, yCenter);
+	// Draw Arrow
+	draw->DrawLine2D(xCenter - 10, yCenter - PLANE_MARKER_HALF_HEIGHT - OFFSET_GAP, xCenter + 10, yCenter - PLANE_MARKER_HALF_HEIGHT - OFFSET_GAP);
+	draw->DrawLine2D(xCenter - 10, yCenter - PLANE_MARKER_HALF_HEIGHT - OFFSET_GAP, xCenter, yCenter - PLANE_MARKER_HALF_HEIGHT - OFFSET_GAP - LENGTH_CROSS_ARM);
+	draw->DrawLine2D(xCenter + 10, yCenter - PLANE_MARKER_HALF_HEIGHT - OFFSET_GAP, xCenter, yCenter - PLANE_MARKER_HALF_HEIGHT - OFFSET_GAP - LENGTH_CROSS_ARM);
 	
-	draw->DrawLine2D(xCenter, yCenter - Y_CROSS_OFFSET_FROM_CENTER, xCenter, yCenter - Y_CROSS_OFFSET_FROM_CENTER - ArmLength);
-	draw->DrawLine2D(xCenter, yCenter + Y_CROSS_OFFSET_FROM_CENTER, xCenter, yCenter + Y_CROSS_OFFSET_FROM_CENTER + ArmLength);*/
-
 	//Draw Aeroplane Marker End-----------------------------------------------------
-	//Draw Card Text----------------------------------------------------------------
-	
-	
-	/*draw->SwitchShader(SHADER_TEXT);
+	//Draw Card Text----------------------------------------------------------------	
+	draw->SwitchShader(SHADER_TEXT);
 	draw->SetTextColor(0, 1, 0);
-	draw->DrawString(f, "N", xCenter - (f->GetTextWidth("N")/2), yCenter - Y_CROSS_OFFSET_FROM_CENTER - ArmLength - 20);
 	
+	float RadiusTextCircle = PLANE_MARKER_HALF_WIDTH + OFFSET_GAP + LENGTH_CROSS_ARM + OFFSET_GAP + 3;
+	
+	RotateText("3", 30.f, xCenter, yCenter, RadiusTextCircle);
+	RotateText("6", 60.f, xCenter, yCenter, RadiusTextCircle);
+	RotateText("E", 90.f, xCenter, yCenter, RadiusTextCircle);
+	
+	RotateText("12", 120.f, xCenter, yCenter, RadiusTextCircle);
+	RotateText("15", 150.f, xCenter, yCenter, RadiusTextCircle);
+	RotateText("S",  180.f, xCenter, yCenter, RadiusTextCircle);
+
+	RotateText("21", 210.f, xCenter, yCenter, RadiusTextCircle);
+	RotateText("24", 240.f, xCenter, yCenter, RadiusTextCircle);
+	RotateText("W",  270.f, xCenter, yCenter, RadiusTextCircle);
+
+	RotateText("30", 300.f, xCenter, yCenter, RadiusTextCircle);
+	RotateText("33", 330.f, xCenter, yCenter, RadiusTextCircle);
+	RotateText("N",  0.f,   xCenter, yCenter, RadiusTextCircle);
+	
+	
+	//Draw Card Text End------------------------------------------------------------
+}
+void GaugeTest::RotateText(std::string strTextToRotate, float AngleToRotate, float xCenter, float yCenter, float RadiusTextCircle)
+{
 	//build rotation matrix
 	//1. Start with an identity matrix
 	glm::mat4 rotMat = glm::mat4(1.0f);
 	//2. Translate the matrix by -centre of the object (make the pivot the origin)
-	rotMat = glm::translate(rotMat, glm::vec3(xCenter, yCenter + Y_CROSS_OFFSET_FROM_CENTER + ArmLength + 20, 0));
+	rotMat = glm::translate(rotMat, glm::vec3(xCenter + RadiusTextCircle * cosf(glm::radians(AngleToRotate - 90.f)),
+		yCenter + RadiusTextCircle * sinf(glm::radians(AngleToRotate - 90.f)), 0));
 	//3.  Rotate the matrix by the desired amount
-	rotMat = glm::rotate(rotMat, glm::radians(180.f), glm::vec3(0, 0, 1));
+	rotMat = glm::rotate(rotMat, glm::radians(AngleToRotate), glm::vec3(0, 0, 1));
 	//4. Translate the matrix by centre of the object (translate back)
-	rotMat = glm::translate(rotMat, -glm::vec3(xCenter, yCenter + Y_CROSS_OFFSET_FROM_CENTER + ArmLength + 20, 0));
+	rotMat = glm::translate(rotMat, -glm::vec3(xCenter + RadiusTextCircle * cosf(glm::radians(AngleToRotate - 90.f)),
+		yCenter + RadiusTextCircle * sinf(glm::radians(AngleToRotate - 90.f)), 0));
 	//5. Use the resulting matrix to transform the object that you desire to rotate
 	draw->SwitchShader(SHADER_TEXT);
 	draw->SetDrawColor2D(0, 1, 0);
 	draw->SetViewText(rotMat);
-	draw->DrawString(f, "S", xCenter - (f->GetTextWidth("S") / 2), yCenter + Y_CROSS_OFFSET_FROM_CENTER + ArmLength + 20);
+	draw->DrawString(f, strTextToRotate, xCenter + RadiusTextCircle * cosf(glm::radians(AngleToRotate - 90.f)) - (f->GetTextWidth(strTextToRotate) / 2),
+					 yCenter + RadiusTextCircle * sinf(glm::radians(AngleToRotate - 90.f)));
 	draw->SetViewText();
-
-	//build rotation matrix
-	//1. Start with an identity matrix
-	rotMat = glm::mat4(1.0f);
-	//2. Translate the matrix by -centre of the object (make the pivot the origin)
-	rotMat = glm::translate(rotMat, glm::vec3(xCenter + X_CROSS_OFFSET_FROM_CENTER + ArmLength + 10, yCenter - f->size/2 + 3, 0));
-	//3.  Rotate the matrix by the desired amount
-	rotMat = glm::rotate(rotMat, glm::radians(90.f), glm::vec3(0, 0, 1));
-	//4. Translate the matrix by centre of the object (translate back)
-	rotMat = glm::translate(rotMat, -glm::vec3(xCenter + X_CROSS_OFFSET_FROM_CENTER + ArmLength + 10, yCenter - f->size/2 + 3, 0));
-	//5. Use the resulting matrix to transform the object that you desire to rotate
-	draw->SwitchShader(SHADER_TEXT);
-	draw->SetDrawColor2D(0, 1, 0);
-	draw->SetViewText(rotMat);
-	draw->DrawString(f, "E", xCenter + X_CROSS_OFFSET_FROM_CENTER + ArmLength + 10, yCenter - f->size/2 + 3);
-	draw->SetViewText();
-
-	//build rotation matrix
-	//1. Start with an identity matrix
-	rotMat = glm::mat4(1.0f);
-	//2. Translate the matrix by -centre of the object (make the pivot the origin)
-	rotMat = glm::translate(rotMat, glm::vec3(xCenter - X_CROSS_OFFSET_FROM_CENTER - ArmLength - 10, yCenter + f->size / 2, 0));
-	//3.  Rotate the matrix by the desired amount
-	rotMat = glm::rotate(rotMat, glm::radians(-90.f), glm::vec3(0, 0, 1));
-	//4. Translate the matrix by centre of the object (translate back)
-	rotMat = glm::translate(rotMat, -glm::vec3(xCenter - X_CROSS_OFFSET_FROM_CENTER - ArmLength - 10, yCenter + f->size / 2, 0));
-	//5. Use the resulting matrix to transform the object that you desire to rotate
-	draw->SwitchShader(SHADER_TEXT);
-	draw->SetDrawColor2D(0, 1, 0);
-	draw->SetViewText(rotMat);
-	draw->DrawString(f, "W", xCenter - X_CROSS_OFFSET_FROM_CENTER - ArmLength - 10, yCenter + f->size / 2);
-	draw->SetViewText();*/
-
-	//draw->DrawString(f, "N", xCenter - (f->GetTextWidth("N") / 2), yCenter - Y_CROSS_OFFSET_FROM_CENTER - ArmLength - 20);
-	//draw->DrawString(f, "E", xCenter + X_CROSS_OFFSET_FROM_CENTER + ArmLength + 10, yCenter + (f->size/2) - 2);
-	//draw->DrawString(f, "W", xCenter - X_CROSS_OFFSET_FROM_CENTER - ArmLength - 10 - (f->GetTextWidth("W")), yCenter + (f->size/2) - 2);
-
-	//draw->DrawString(f, "3", xCenter + X_CROSS_OFFSET_FROM_CENTER + ArmLength + 10, yCenter - f->size / 2 + 3);
-	
-	draw->SwitchShader(SHADER_TEXT);
-	draw->SetTextColor(0, 1, 0);
-	
-	float RadiusTextCircle = PLANE_MARKER_HALF_WIDTH + OFFSET_GAP + LENGTH_CROSS_ARM + 10;
-	draw->DrawString(f, "3", xCenter + RadiusTextCircle * cosf(glm::radians(300.f)) - (f->GetTextWidth("3") / 2), yCenter + RadiusTextCircle * sinf(glm::radians(300.f)));
-	draw->DrawString(f, "6", xCenter + RadiusTextCircle * cosf(glm::radians(330.f)) - (f->GetTextWidth("6") / 2), yCenter + RadiusTextCircle * sinf(glm::radians(330.f)));
-	draw->DrawString(f, "E", xCenter + RadiusTextCircle * cosf(glm::radians(0.f)) - (f->GetTextWidth("E") / 2), yCenter + RadiusTextCircle * sinf(glm::radians(0.f)) + (f->size / 2));  //+ (f->size / 2) - 2);
-	
-	draw->DrawString(f, "12", xCenter + RadiusTextCircle * cosf(glm::radians(30.f)) - (f->GetTextWidth("12") / 2), yCenter + RadiusTextCircle * sinf(glm::radians(30.f)) + (f->size / 2)); //+ (f->size / 2) - 2);
-	draw->DrawString(f, "15", xCenter + RadiusTextCircle * cosf(glm::radians(60.f)) - (f->GetTextWidth("15") / 2), yCenter + RadiusTextCircle * sinf(glm::radians(60.f)) + (f->size / 2));// + (f->size / 2) - 2);
-	draw->DrawString(f, "S", xCenter + RadiusTextCircle * cosf(glm::radians(90.f)) - (f->GetTextWidth("S")/2), yCenter + RadiusTextCircle * sinf(glm::radians(90.f)) + (f->size / 2)); //+ (f->size / 2) - 2);
-	
-	draw->DrawString(f, "21", xCenter + RadiusTextCircle * cosf(glm::radians(120.f)) - (f->GetTextWidth("21")/2), yCenter + RadiusTextCircle * sinf(glm::radians(120.f)) + (f->size / 2));
-	draw->DrawString(f, "24", xCenter + RadiusTextCircle * cosf(glm::radians(150.f)) - (f->GetTextWidth("24"))/2, yCenter + RadiusTextCircle * sinf(glm::radians(150.f)) + (f->size / 2));
-	draw->DrawString(f, "W",  xCenter + RadiusTextCircle * cosf(glm::radians(180.f)) - (f->GetTextWidth("W")/2), yCenter + RadiusTextCircle * sinf(glm::radians(180.f)) + (f->size / 2));
-	
-	draw->DrawString(f, "30", xCenter + RadiusTextCircle * cosf(glm::radians(210.f)) - (f->GetTextWidth("30") / 2), yCenter + RadiusTextCircle * sinf(glm::radians(210.f)));
-	draw->DrawString(f, "33", xCenter + RadiusTextCircle * cosf(glm::radians(240.f)) - (f->GetTextWidth("33") / 2), yCenter + RadiusTextCircle * sinf(glm::radians(240.f)));
-	draw->DrawString(f, "N", xCenter + RadiusTextCircle * cosf(glm::radians(270.f)) - (f->GetTextWidth("N") / 2), yCenter + RadiusTextCircle * sinf(glm::radians(270.f)));
-	//draw->DrawString(f, "E", xCenter + X_CROSS_OFFSET_FROM_CENTER + ArmLength + 10, yCenter + (f->size / 2) - 2);
-	//draw->DrawString(f, "3", (xCenter+ RadiusTextCircle * 0.866), (yCenter + RadiusTextCircle* 0.5));
-	//Draw Card Text End------------------------------------------------------------
 }
-
-
+//---------------------------------------------------------------------------------------------------------------------------------
