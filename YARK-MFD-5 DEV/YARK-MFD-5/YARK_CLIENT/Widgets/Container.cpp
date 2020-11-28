@@ -73,6 +73,7 @@ void ContainerLoadWidgets() {
 	widgets.push_back(new SevenSegment());
 	widgets.push_back(new NavGauge());
 	widgets.push_back(new GaugeTest());
+	widgets.push_back(new GaugeCompass());
 	widgets.push_back(new AirPlaneAutoPilot());
 //	widgets.push_back(new FuelDisplay());
 	widgets.push_back(new Dock());

@@ -13,6 +13,7 @@
 #include "SevenSegment.h"
 #include "NavGauge.h"
 #include "GaugeTest.h"
+#include "GaugeCompass.h"
 #include "AirPlaneAutoPilot.h"
 #include "Dock.h"
 
