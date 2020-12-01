@@ -14,6 +14,7 @@
 #include "NavGauge.h"
 #include "GaugeTest.h"
 #include "GaugeCompass.h"
+#include "GaugeVSI.h"
 #include "AirPlaneAutoPilot.h"
 #include "Dock.h"
 

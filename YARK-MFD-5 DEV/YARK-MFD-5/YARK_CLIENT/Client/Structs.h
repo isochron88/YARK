@@ -244,13 +244,13 @@ struct VesselPacket {
 
 	uint8_t MainControls;                   //SAS RCS Lights Gear Brakes Abort Stage
 	uint16_t ActionGroups;                   //action groups 1-10 in 2 uint8_ts
-	float VVI;
+	float VVI;				//Vertical Speed
 	float G;
-	float RAlt;
-	float Alt;
-	float Vsurf;
-	uint8_t MaxOverHeat;    //  Max part overheat (% percent)
-	float IAS;           //  Indicated Air Speed
+	float RAlt;				//Radar Altitude
+	float Alt;				//Altitude
+	float Vsurf;			//Horizontal Speed
+	uint8_t MaxOverHeat;    //Max part overheat (% percent)
+	float IAS;				//Indicated Air Speed
 	float VOrbit;
 
 	//###### ORBITAL ######
