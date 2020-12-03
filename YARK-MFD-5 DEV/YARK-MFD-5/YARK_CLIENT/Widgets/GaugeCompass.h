@@ -14,4 +14,5 @@ public:
 	GaugeCompass();
 	void Draw(XY pos, XY size);
 	void RotateText(std::string strTextToRotate, float AngleToRotate, float xCenter, float yCenter, float RadiusTextCircle);
+	void DrawRadialLine(float Angle, float xCenter, float yCenter, XY size, int iArcOffsetFromCenter, int iDashHeight);
 };

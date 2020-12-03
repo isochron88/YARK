@@ -114,33 +114,24 @@ void GaugeCompass::Draw(XY pos, XY size) {
 	draw->SetDrawColor2D(0, 1, 0);
 	draw->SetView2D(rotCompassCardMat);
 
-	int ARC_OFFSET_FROM_CENTER = 65;
-	int SHIFT_GAUGE_DOWN = 25; //so Gauge is not at top of window
+	int iArcOffsetFromCenter = 65;
+	int iShiftGaugeDown = 25; //so Gauge is not at top of window
 	float AngleStart = -180;
 	float AngleEnd = 180;
-	float DegDistBetweenDash = 5;
-	int DashHeightA = 10;
-	int DashHeightB = 20;
-
+	float DashDistBetweenDashDeg = 5;
+	int DashHeightShort = 10;
+	int DashHeightLong = 20;
 	
-	for (float theta = AngleStart; theta <= AngleEnd; theta += DegDistBetweenDash)
+	for (float theta = AngleStart; theta <= AngleEnd; theta += DashDistBetweenDashDeg)
 	{
-		float y = -glm::cos(glm::radians(theta));
-		float x = glm::sin(glm::radians(theta));
-
-		float r1 = size.x / 2 - ARC_OFFSET_FROM_CENTER;
-		float r2;
-
-		if ((int)theta % int(DegDistBetweenDash * 2)) //make every second dash height shorter
+		if ((int)round(theta) % int(DashDistBetweenDashDeg * 2)) //make each nth second dash height longer
 		{
-			r2 = size.x / 2 - ARC_OFFSET_FROM_CENTER - DashHeightA;
+			DrawRadialLine(theta, xCenter, yCenter, size, iArcOffsetFromCenter, DashHeightShort);
 		}
 		else
 		{
-			r2 = size.x / 2 - ARC_OFFSET_FROM_CENTER - DashHeightB;
+			DrawRadialLine(theta, xCenter, yCenter, size, iArcOffsetFromCenter, DashHeightLong);
 		}
-		draw->DrawLine2D(xCenter + x * r1, yCenter + y * r1, xCenter + x * r2, yCenter + y * r2);
-		
 	}
 	draw->SetView2D();
 
@@ -168,9 +159,19 @@ void GaugeCompass::Draw(XY pos, XY size) {
 	//Draw Card Text End-------------------------------------------------------------
 }
 	
-
-	//End Rotate Compass Card-------------------------------------------------------
-	
+//---------------------------------------------------------------------------------------------------------------------------------
+void GaugeCompass::DrawRadialLine(float Angle, float xCenter, float yCenter, XY size, int iArcOffsetFromCenter, int iDashHeight)
+{
+	float xSizeGuage = 394; // temporary solution to make radial lines non-scalable
+	float y = -glm::cos(glm::radians(Angle));
+	float x = glm::sin(glm::radians(Angle));
+	//float r1 = size.x / 2 - iArcOffsetFromCenter;
+	//float r2 = size.x / 2 - iArcOffsetFromCenter - iDashHeight;
+	float r1 = xSizeGuage / 2 - iArcOffsetFromCenter;
+	float r2 = xSizeGuage / 2 - iArcOffsetFromCenter - iDashHeight;
+	draw->DrawLine2D(xCenter + x * r1, yCenter + y * r1, xCenter + x * r2, yCenter + y * r2);
+}
+//---------------------------------------------------------------------------------------------------------------------------------	
 void GaugeCompass::RotateText(std::string strTextToRotate, float AngleToRotate, float xCenter, float yCenter, float RadiusTextCircle)
 {
 	//build rotation matrix

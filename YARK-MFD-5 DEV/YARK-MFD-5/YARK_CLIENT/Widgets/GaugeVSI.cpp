@@ -169,10 +169,13 @@ float GaugeVSI::ScaleVertSpeedToDeg(float VertSpeed)
 //---------------------------------------------------------------------------------------------------------------------------------
 void GaugeVSI::DrawRadialLine(float Angle, float xCenter, float yCenter, XY size, int iArcOffsetFromCenter, int iDashHeight)
 {
+	float xSizeGuage = 394; // temporary solution to make radial lines non-scalable
 	float y = -glm::cos(glm::radians(Angle));
 	float x = glm::sin(glm::radians(Angle));
-	float r1 = size.x / 2 - iArcOffsetFromCenter;
-	float r2 = size.x / 2 - iArcOffsetFromCenter - iDashHeight;
+	//float r1 = size.x / 2 - iArcOffsetFromCenter;
+	//float r2 = size.x / 2 - iArcOffsetFromCenter - iDashHeight;
+	float r1 = xSizeGuage / 2 - iArcOffsetFromCenter;
+	float r2 = xSizeGuage / 2 - iArcOffsetFromCenter - iDashHeight;
 	draw->DrawLine2D(xCenter + x * r1, yCenter + y * r1, xCenter + x * r2, yCenter + y * r2);
 }
 //---------------------------------------------------------------------------------------------------------------------------------
