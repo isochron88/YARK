@@ -132,6 +132,7 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Widgets\Fuel.h" />
     <ClCompile Include="Widgets\Fuel.cpp" />
+    <ClCompile Include="Widgets\GaugeAltimeter.cpp" />
     <ClCompile Include="Widgets\GaugeCompass.cpp" />
     <ClCompile Include="Widgets\GaugeTest.cpp" />
     <ClCompile Include="Widgets\GaugeVSI.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Client\Client.h" />
     <ClInclude Include="Client\Structs.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="Widgets\GaugeAltimeter.h" />
     <ClInclude Include="Widgets\GaugeCompass.h" />
     <ClInclude Include="Widgets\GaugeTest.h" />
     <ClInclude Include="Widgets\GaugeVSI.h" />

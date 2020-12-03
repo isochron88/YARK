@@ -75,6 +75,7 @@ void ContainerLoadWidgets() {
 	widgets.push_back(new GaugeTest());
 	widgets.push_back(new GaugeCompass());
 	widgets.push_back(new GaugeVSI());
+	widgets.push_back(new GaugeAltimeter());
 	widgets.push_back(new AirPlaneAutoPilot());
 //	widgets.push_back(new FuelDisplay());
 	widgets.push_back(new Dock());
