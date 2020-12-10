@@ -16,6 +16,7 @@
 #include "GaugeCompass.h"
 #include "GaugeVSI.h"
 #include "GaugeAltimeter.h"
+#include "GaugeFuelStrip.h"
 #include "AirPlaneAutoPilot.h"
 #include "Dock.h"
 
